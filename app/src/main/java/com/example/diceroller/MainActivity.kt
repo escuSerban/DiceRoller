@@ -2,29 +2,24 @@ package com.example.diceroller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import com.example.diceroller.databinding.ActivityMainBinding
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var diceOneImage: ImageView
-    private lateinit var diceTwoImage: ImageView
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        val rollButton: Button = findViewById(R.id.roll_button)
-        rollButton.setOnClickListener {
+        binding.setButtonClicked {
             Toast.makeText(this, "Good Luck!", Toast.LENGTH_SHORT).show()
 
             rollDice()
         }
-        diceOneImage = findViewById(R.id.dice_one_image)
-        diceTwoImage = findViewById(R.id.dice_two_image)
     }
 
     private fun rollDice() {
@@ -45,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             5 -> R.drawable.dice_5
             else -> R.drawable.dice_6
         }
-        diceOneImage.setImageResource(drawableResourceLeft)
-        diceTwoImage.setImageResource(drawableResourceRight)
+        binding.diceOneImage.setImageResource(drawableResourceLeft)
+        binding.diceTwoImage.setImageResource(drawableResourceRight)
     }
 }
